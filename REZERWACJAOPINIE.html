@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="styl.css">
+
+
+<!-- ══ SEO ══════════════════════════════════════════════════════════════
+     UZUPEŁNIONE: imię i nazwisko, tytuł, miasto, adres, telefon.
+     DO UZUPEŁNIENIA: ceny i czasy wizyt, godziny otwarcia, link Booksy,
+     opinie, nazwa gabinetu, domena, PWZFz, NIP, e-mail.
+     ════════════════════════════════════════════════════════════════════ -->
+<title>Fizjoterapeuta Ostrów Wielkopolski – Michał Wasielewski | Terapia manualna</title>
+<meta name="description" content="Fizjoterapia i terapia manualna w Ostrowie Wielkopolskim, ul. Wrocławska 81. Holistyczne podejście — szukam przyczyny, nie tylko bolącego miejsca. Tel. 607 051 191">
+<link rel="canonical" href="https://[DOMENA]/">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Fizjoterapeuta Ostrów Wielkopolski – Michał Wasielewski">
+<meta property="og:description" content="Terapia manualna, tkanek miękkich, pinoterapia, IASTM. Ostrów Wielkopolski, ul. Wrocławska 81, pokój 218.">
+<meta property="og:url" content="https://[DOMENA]/">
+<meta property="og:image" content="https://[DOMENA]/img/og.jpg">
+<meta name="theme-color" content="#0E3A45">
+
+<!-- <link rel="icon" href="/favicon.svg" type="image/svg+xml"> -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styl.css">
+
+<script>document.documentElement.classList.add('js');</script>
+
+<!-- JS w osobnych plikach. `defer` = wykonanie po zbudowaniu DOM,
+     więc żaden element nie zostanie pominięty. Ta podstrona nie ma
+     kalendarza, więc kalendarz.js nie jest tu dołączany.            -->
+<script src="skrypt.js" defer></script>
+</head>
+
+<body>
+<a class="skip" href="#main">Przejdź do treści</a>
+
+<!-- ══════════════ PASEK GÓRNY ══════════════ -->
+<div class="topbar">
+  <div class="wrap">
+    <span>ul. Wrocławska 81, pokój 218 · Ostrów Wielkopolski</span>
+    <a href="tel:+48607051191">tel. 607 051 191</a>
+    <span>Pn–Pt [GODZ-PN] · Sob [GODZ-SO]</span>
+  </div>
+</div>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header class="header" id="header">
+   <a href="index.html">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Michał Wasielewski · Fizjoterapia — strona główna">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M4 34 A30 30 0 0 1 34 4" fill="none" stroke="#0E3A45" stroke-width="3" stroke-linecap="round"/>
+        <path d="M13 34 A21 21 0 0 1 25 14.8" fill="none" stroke="#C42A50" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="4" cy="34" r="2.6" fill="#0E3A45"/>
+      </svg>
+      <span class="brand-txt">
+       
+        <span class="brand-name">Michał Wasielewski</span>
+        <span class="brand-sub">Fizjoterapia</span>
+      </span>
+      </a>
+    </a>
+    <!-- Menu zawiera wyłącznie sekcje, które istnieją na stronie.
+         Gdy przywrócisz kolejne, dopisz je tutaj i w menu mobilnym:
+         <a href="#dla-kogo">Dla kogo</a>   <a href="#metody">Metody</a>
+         <a href="#o-mnie">O mnie</a>       <a href="#przebieg">Przebieg wizyty</a>
+         <a href="#cennik">Cennik</a>       <a href="#pierwsza-wizyta">Pierwsza wizyta</a>
+         <a href="#kontakt">Kontakt</a>                                        -->
+    <nav class="nav" id="nav" aria-label="Menu główne">
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Menu główne">
+      <a href="dlakogo.html">Dla kogo</a>
+      <a href="metody.html">Metody</a>
+      <a href="omnie.html">O mnie</a>
+      <a href="cennik.html">Cennik</a>
+      <a href="pierwszawizyta.html">Pierwsza wizyta</a>
+      <a href="REZERWACJAOPINIE.html">Opinie</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+    </nav>
+
+    <a class="btn btn--primary btn--sm header-cta" href="REZERWACJAOPINIE.html" target="_blank" rel="noopener" data-cta="header">Zarezerwuj wizytę</a>
+
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="mobileNav" aria-label="Otwórz menu">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <div class="wrap">
+    <a href="#rezerwacja">Rezerwacja</a>
+    <a href="#opinie">Opinie</a>
+    <a class="btn btn--primary btn--block" href="[LINK BOOKSY]" target="_blank" rel="noopener">Zarezerwuj wizytę</a>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ══════════════ REZERWACJA + OPINIE — dwie kolumny ══════════════ -->
+<section class="section section--petrol" id="rezerwacja">
+  <div class="wrap book-grid">
+
+    <!-- ─── KOLUMNA LEWA: kalendarz ─── -->
+    <div class="book-col">
+      <p class="eyebrow eyebrow--light">Rezerwacja</p>
+      <h2>Zarezerwuj wizytę</h2>
+      <p class="book-lede">Wybierz usługę i dzień, a przeniosę Cię prosto do kalendarza z wolnymi godzinami.</p>
+
+      <div class="cal">
+        <div class="cal-block">
+          <span class="cal-lbl"><b>01</b> Rodzaj wizyty</span>
+          <div class="pills" id="calServices" role="group" aria-label="Rodzaj wizyty"></div>
+        </div>
+
+        <div class="cal-block">
+          <span class="cal-lbl"><b>02</b> Dzień</span>
+          <div class="cal-nav">
+            <button class="cal-arrow" id="calPrev" aria-label="Poprzedni miesiąc">&larr;</button>
+            <span class="cal-month" id="calMonth" aria-live="polite"></span>
+            <button class="cal-arrow" id="calNext" aria-label="Następny miesiąc">&rarr;</button>
+          </div>
+          <div class="cal-grid" id="calGrid" role="group" aria-label="Kalendarz — dni przyjęć"></div>
+          <div class="cal-legend">
+            <span><i class="cal-key" aria-hidden="true"></i> Dzień przyjęć</span>
+            <span><i class="cal-key busy" aria-hidden="true"></i> Twój wybór</span>
+          </div>
+        </div>
+
+        <div class="cal-sum" id="calSum" aria-live="polite"></div>
+        <div class="cal-go">
+          <button class="btn btn--primary btn--block" id="calGo" data-cta="kalendarz">Przejdź do wolnych godzin</button>
+        </div>
+        <p class="cal-msg" id="calMsg" role="status" aria-live="polite"></p>
+      </div>
+
+      <!-- ══ OFICJALNY WIDGET BOOKSY ══
+           Panel Booksy → Ustawienia biznesu → Rezerwacje online → Twoja strona
+           → „Kopiuj do schowka". Wklej otrzymany skrypt DOKŁADNIE tutaj.
+           Kalendarz powyżej wykryje go automatycznie i będzie otwierał
+           okno Booksy na tej stronie zamiast w nowej karcie. -->
+
+      <p class="booking-alt">
+        Wolisz porozmawiać? Zadzwoń: <a href="tel:+48607051191">607 051 191</a><br>
+        Odbieram między wizytami — jeśli nie odbiorę, oddzwaniam tego samego dnia.
+      </p>
+    </div>
+
+    <!-- ─── KOLUMNA PRAWA: opinie ─── -->
+    <aside class="book-col" id="opinie" aria-labelledby="opinieTytul">
+      <p class="eyebrow eyebrow--light">Opinie</p>
+      <h2 id="opinieTytul">Co mówią pacjenci</h2>
+
+      <div class="rating">
+        <span class="rating-n">[OCENA]</span>
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <span>[LICZBA OPINII] opinii w Google</span>
+      </div>
+
+      <div class="reviews reviews--stack">
+        <article class="review">
+          <blockquote>[TREŚĆ OPINII — 2–4 zdania. Skopiuj dosłownie z Google, nie wygładzaj.]</blockquote>
+          <footer><b>[IMIĘ PACJENTA]</b>[MIESIĄC ROK] · Google</footer>
+        </article>
+        <article class="review">
+          <blockquote>[TREŚĆ OPINII]</blockquote>
+          <footer><b>[IMIĘ PACJENTA]</b>[MIESIĄC ROK] · Google</footer>
+        </article>
+        <article class="review">
+          <blockquote>[TREŚĆ OPINII]</blockquote>
+          <footer><b>[IMIĘ PACJENTA]</b>[MIESIĄC ROK] · Google</footer>
+        </article>
+      </div>
+
+      <div class="widget-slot">
+        <b>Miejsce na widget opinii Google</b>
+        Zamiast przepisywać opinie ręcznie, osadź widget (Trustindex, Elfsight
+        lub Google Reviews API) — będą aktualne i oznaczone logo Google.
+      </div>
+    </aside>
+
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════ STOPKA ══════════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>Gabinet</h4>
+        <p><strong style="color:#fff">Michał Wasielewski</strong><br>mgr fizjoterapii<br>Fizjoterapia i terapia manualna w Ostrowie Wielkopolskim.</p>
+        <p class="footer-pwz">PWZFz nr [NR PWZFZ] · NIP [NIP]</p>
+      </div>
+      <div>
+        <h4>Serwis</h4>
+        <ul>
+          <li><a href="#rezerwacja">Rezerwacja</a></li>
+          <li><a href="#opinie">Opinie</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li>ul. Wrocławska 81, pok. 218</li>
+          <li>63-400 Ostrów Wielkopolski</li>
+          <li><a href="tel:+48607051191">+48 607 051 191</a></li>
+          <li><a href="mailto:[E-MAIL]">[E-MAIL]</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Godziny</h4>
+        <ul>
+          <li>Pn–Pt &nbsp; [GODZ-PN]</li>
+          <li>Sobota &nbsp; [GODZ-SO]</li>
+          <li>Niedziela &nbsp; nieczynne</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> Michał Wasielewski</span>
+      <span><a href="/polityka-prywatnosci">Polityka prywatności</a> · <a href="/regulamin">Regulamin</a></span>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html>

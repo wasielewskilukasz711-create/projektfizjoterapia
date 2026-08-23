@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Cennik fizjoterapii Ostrów Wielkopolski – Michał Wasielewski</title>
+<meta name="description" content="Cennik gabinetu fizjoterapii w Ostrowie Wielkopolskim, ul. Wrocławska 81. Ceny pierwszej i kolejnej wizyty, terapii kompleksowej i kinesiotapingu. Bez ukrytych kosztów.">
+<link rel="canonical" href="https://[DOMENA]/cennik.html">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Cennik – Michał Wasielewski, fizjoterapia Ostrów Wielkopolski">
+<meta property="og:description" content="Ceny wizyt bez ukrytych kosztów. Cena obejmuje wywiad, badanie, terapię i plan ćwiczeń.">
+<meta property="og:url" content="https://[DOMENA]/cennik.html">
+<meta property="og:image" content="https://[DOMENA]/img/og.jpg">
+<meta name="theme-color" content="#0E3A45">
+
+<!-- <link rel="icon" href="/favicon.svg" type="image/svg+xml"> -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<!-- POPRAWKA: arkusz stylów musi być WEWNĄTRZ <head>, nie przed nim -->
+<link rel="stylesheet" href="styl.css">
+
+<script>document.documentElement.classList.add('js');</script>
+
+<!-- JS w osobnych plikach. `defer` = wykonanie po zbudowaniu DOM,
+     więc żaden element nie zostanie pominięty. Ta podstrona nie ma
+     kalendarza, więc kalendarz.js nie jest tu dołączany.            -->
+<script src="skrypt.js" defer></script>
+</head>
+
+<body>
+<a class="skip" href="#main">Przejdź do treści</a>
+
+<!-- ══════════════ PASEK GÓRNY ══════════════ -->
+<div class="topbar">
+  <div class="wrap">
+    <span>ul. Wrocławska 81, pokój 218 · Ostrów Wielkopolski</span>
+    <a href="tel:+48607051191">tel. 607 051 191</a>
+    <span>Pn–Pt [GODZ-PN] · Sob [GODZ-SO]</span>
+  </div>
+</div>
+
+<!-- ══════════════ HEADER ══════════════
+     POPRAWKA: nagłówek był niedomknięty, przez co cała sekcja cennika
+     lądowała wewnątrz elementu z position:sticky. Teraz zamyka się
+     prawidłowo przed <main>.                                         -->
+<header class="header" id="header">
+   <a href="index.html">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Michał Wasielewski · Fizjoterapia — strona główna">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M4 34 A30 30 0 0 1 34 4" fill="none" stroke="#0E3A45" stroke-width="3" stroke-linecap="round"/>
+        <path d="M13 34 A21 21 0 0 1 25 14.8" fill="none" stroke="#C42A50" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="4" cy="34" r="2.6" fill="#0E3A45"/>
+      </svg>
+      <span class="brand-txt">
+       
+        <span class="brand-name">Michał Wasielewski</span>
+        <span class="brand-sub">Fizjoterapia</span>
+      </span>
+      </a>
+    </a>
+
+    <!-- POPRAWKA: kotwice #dla-kogo, #metody i #o-mnie prowadzą do sekcji,
+         których na tej podstronie nie ma. Muszą wskazywać stronę główną. -->
+    <nav class="nav" id="nav" aria-label="Menu główne">
+      <a href="dlakogo.html">Dla kogo</a>
+      <a href="metody.html">Metody</a>
+      <a href="omnie.html">O mnie</a>
+      <a href="cennik.html">Cennik</a>
+      <a href="pierwszawizyta.html">Pierwsza wizyta</a>
+      <a href="REZERWACJAOPINIE.html">Opinie</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+
+    <a class="btn btn--primary btn--sm header-cta" href="rezerwacja.html" data-cta="header-cennik">Zarezerwuj wizytę</a>
+
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="mobileNav" aria-label="Otwórz menu">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- POPRAWKA: menu mobilne było w ogóle nieobecne na tej podstronie -->
+<div class="mobile-nav" id="mobileNav">
+  <div class="wrap">
+    <a href="index.html#dla-kogo">Dla kogo</a>
+    <a href="index.html#metody">Metody</a>
+    <a href="index.html#o-mnie">O mnie</a>
+    <a href="cennik.html" aria-current="page">Cennik</a>
+    <a href="pierwszawizyta.html">Pierwsza wizyta</a>
+    <a href="REZERWACJAOPINIE.html">Rezerwacja i opinie</a>
+    <a href="kontakt.html">Kontakt</a>
+    <a class="btn btn--primary btn--block" href="REZERWACJAOPINIE.html">Zarezerwuj wizytę</a>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ══════════════ CENNIK ══════════════ -->
+<section class="section" id="cennik">
+  <div class="wrap">
+    <div class="sec-head reveal">
+
+      <h1>Cennik</h1>
+      <p class="lede">Cena obejmuje całą wizytę: wywiad, badanie, terapię i dobrane ćwiczenia. Nie doliczam nic osobno.</p>
+    </div>
+
+    <div class="price-wrap reveal">
+      <table class="price">
+        <caption class="sr-only">Cennik usług fizjoterapeutycznych</caption>
+        <thead>
+          <tr>
+            <th scope="col">Usługa</th>
+            <th scope="col">Czas</th>
+            <th scope="col" style="text-align:right">Cena</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="is-featured">
+            <td class="p-name">Pierwsza wizyta <span class="tag">Zacznij tutaj</span><small>Wywiad, badanie, terapia i plan ćwiczeń</small></td>
+            <td class="p-time">[CZAS-1] min</td>
+            <td class="p-cost">[CENA-1] zł</td>
+          </tr>
+          <tr>
+            <td class="p-name">Kinesiotaping<small>Zabieg samodzielny</small></td>
+            <td class="p-time">[CZAS-4] min</td>
+            <td class="p-cost">[CENA-4] zł</td>
+          </tr>
+          <tr>
+            <td class="p-name">Pakiet [X] wizyt<small>Ważny [Y] miesięcy</small></td>
+            <td class="p-time">—</td>
+            <td class="p-cost">[CENA-5] zł</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="price-meta reveal">
+      <div>
+        <h2>Płatność</h2>
+        <p>[np. gotówka, karta i BLIK. Faktury wystawiam na życzenie — poinformuj mnie przed wizytą.]</p>
+      </div>
+      <div>
+        <h2>Odwoływanie wizyt</h2>
+        <p>Bezpłatnie do [X] godzin przed terminem — telefonicznie pod <a href="tel:+48607051191">607 051 191</a>. Przy późniejszym odwołaniu [ZASADA].</p>
+      </div>
+    </div>
+
+    <div class="btn-row reveal" style="margin-top:2.5rem">
+      <a class="btn btn--primary" href="REZERWACJAOPINIE.html" data-cta="cennik-cta">Zarezerwuj wizytę</a>
+      <a class="btn btn--ghost" href="pierwszawizyta.html">Jak przygotować się do wizyty</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════ STOPKA ══════════════
+     POPRAWKA: stopka wisiała poza znacznikiem </html> i była
+     niedomknięta — przeglądarka jej nie renderowała.               -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>Gabinet</h4>
+        <p><strong style="color:#fff">Michał Wasielewski</strong><br>mgr fizjoterapii<br>Fizjoterapia i terapia manualna w Ostrowie Wielkopolskim.</p>
+        <p class="footer-pwz">PWZFz nr [NR PWZFZ] · NIP [NIP]</p>
+      </div>
+      <div>
+        <h4>Serwis</h4>
+        <ul>
+          <li><a href="index.html#dla-kogo">Dla kogo</a></li>
+          <li><a href="index.html#metody">Metody</a></li>
+          <li><a href="cennik.html">Cennik</a></li>
+          <li><a href="pierwszawizyta.html">Pierwsza wizyta</a></li>
+          <li><a href="rezerwacja.html">Rezerwacja i opinie</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li>ul. Wrocławska 81, pok. 218</li>
+          <li>63-400 Ostrów Wielkopolski</li>
+          <li><a href="tel:+48607051191">+48 607 051 191</a></li>
+          <li><a href="mailto:[E-MAIL]">[E-MAIL]</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Godziny</h4>
+        <ul>
+          <li>Pn–Pt &nbsp; [GODZ-PN]</li>
+          <li>Sobota &nbsp; [GODZ-SO]</li>
+          <li>Niedziela &nbsp; nieczynne</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> Michał Wasielewski</span>
+      <span><a href="polityka-prywatnosci.html">Polityka prywatności</a> · <a href="regulamin.html">Regulamin</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════ STICKY CTA MOBILE ══════════════ -->
+<div class="mobile-cta">
+  <a class="btn btn--primary" href="rezerwacja.html" data-cta="sticky-mobile-cennik">Zarezerwuj</a>
+  <a class="btn btn--ghost" href="tel:+48607051191" style="background:#fff">Zadzwoń</a>
+</div>
+
+<!-- ══════════════ DANE STRUKTURALNE ══════════════
+     POPRAWKA: usunięty schemat FAQPage. Na tej podstronie nie ma
+     sekcji FAQ, a Google wymaga, żeby dane strukturalne odpowiadały
+     treści widocznej na stronie — inaczej grozi kara ręczna.
+     FAQPage zostaw wyłącznie na podstronie, która faktycznie
+     wyświetla te pytania.                                          -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Physiotherapy",
+  "name":"Michał Wasielewski · Fizjoterapia",
+  "image":"https://[DOMENA]/img/portret-hero.jpg",
+  "url":"https://[DOMENA]",
+  "telephone":"+48607051191",
+  "email":"[E-MAIL]",
+  "priceRange":"[CENA-1]–[CENA-3] PLN",
+  "currenciesAccepted":"PLN",
+  "medicalSpecialty":"Physiotherapy",
+  "areaServed":"Ostrów Wielkopolski",
+  "address":{
+    "@type":"PostalAddress",
+    "streetAddress":"Wrocławska 81, pokój 218",
+    "addressLocality":"Ostrów Wielkopolski",
+    "addressRegion":"wielkopolskie",
+    "postalCode":"63-400",
+    "addressCountry":"PL"
+  },
+  "geo":{"@type":"GeoCoordinates","latitude":"[SZEROKOŚĆ]","longitude":"[DŁUGOŚĆ]"},
+  "openingHoursSpecification":[
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"[GODZ-OD]","closes":"[GODZ-DO]"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"[SOB-OD]","closes":"[SOB-DO]"}
+  ],
+  "availableService":[
+    {"@type":"MedicalTherapy","name":"Terapia manualna"},
+    {"@type":"MedicalTherapy","name":"Terapia tkanek miękkich"},
+    {"@type":"MedicalTherapy","name":"Pinoterapia"},
+    {"@type":"MedicalTherapy","name":"IASTM"},
+    {"@type":"MedicalTherapy","name":"Terapia punktów spustowych"},
+    {"@type":"MedicalTherapy","name":"Mobilizacje stawów"},
+    {"@type":"MedicalTherapy","name":"Kinesiotaping"},
+    {"@type":"MedicalTherapy","name":"Ćwiczenia terapeutyczne"}
+  ],
+  "sameAs":["[LINK BOOKSY]","[FACEBOOK]","[INSTAGRAM]"]
+}
+</script>
+
+</body>
+</html>
