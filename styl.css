@@ -1,10 +1,15 @@
 /* POMOCNICZE */
-#tekstdoprawej {
-   margin-left: auto;
-   text-align: right;
+.sec-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
-
+.kolumna-lewa,
+.kolumna-prawa {
+    display: flex;
+    flex-direction: column;
+}
 
 
 /* ═══════════════════════════════════════════════════════════════════════
