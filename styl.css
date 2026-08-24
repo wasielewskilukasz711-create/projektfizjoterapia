@@ -1,17 +1,19 @@
 /* POMOCNICZE */
-.sec-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+.sec-head--split{
+  max-width:none;                       /* nadpisuje 46ch */
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:clamp(1.75rem,4vw,4rem);
 }
-
-.kolumna-lewa,
-.kolumna-prawa {
-    display: flex;
-    flex-direction: column;
+.sec-head--split > *{
+  flex:1 1 320px;                       /* poniżej ~720px zawija się sam */
+  min-width:0;
+  max-width:46ch;                       /* zachowuje komfort czytania */
+  display:flex;
+  flex-direction:column;
 }
-
-
 /* ═══════════════════════════════════════════════════════════════════════
    1. TOKENY
    ═══════════════════════════════════════════════════════════════════════ */
