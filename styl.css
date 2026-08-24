@@ -68,7 +68,7 @@ p{text-wrap:pretty}
 
 .lede{font-size:clamp(1.05rem,1.45vw,1.24rem);line-height:1.6;color:var(--body)}
 .sec-head{max-width:46ch;margin-bottom:clamp(2.5rem,4vw,3.5rem)}
-.sec-head-right{max-width:46ch;margin-bottom:clamp(2.5rem,4vw,3.5rem);float:right;}
+.sec-head-right{max-width:46ch;margin-bottom:clamp(2.5rem,4vw,3.5rem);margin-left:auto;}
 .sec-head p{margin-top:1.1rem}
 
 /* ═══════════════════════════════════════════════════════════════════════
