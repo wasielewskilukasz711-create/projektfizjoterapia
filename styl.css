@@ -1,62 +1,113 @@
-/* ═══════════════════════════════════════════════════════════════════════
-   1. TOKENY
-   ═══════════════════════════════════════════════════════════════════════
+/* ╔═════════════════════════════════════════════════════════════════════╗
+   ║  ARKUSZ STYLÓW — GABINET FIZJOTERAPII, OSTRÓW WIELKOPOLSKI          ║
+   ║  Jeden plik dla wszystkich podstron.                                ║
+   ╚═════════════════════════════════════════════════════════════════════╝
 
+   ┌─ MAPA PLIKU ───────────────────────────────────────────────────────┐
+   │                                                                     │
+   │  CZĘŚĆ 1   FUNDAMENT              wszystkie podstrony              │
+   │  CZĘŚĆ 2   SZKIELET STRONY        wszystkie podstrony              │
+   │  CZĘŚĆ 3   KOMPONENTY WSPÓLNE     używane na 2+ podstronach        │
+   │  CZĘŚĆ 4   index.html             strona główna                    │
+   │  CZĘŚĆ 5   cennik.html                                             │
+   │  CZĘŚĆ 6   pierwszawizyta.html                                     │
+   │  CZĘŚĆ 7   rezerwacja.html        kalendarz + opinie               │
+   │  CZĘŚĆ 8   kontakt.html           mapa, formularz, godziny         │
+   │  CZĘŚĆ 9   regulamin.html         + polityka-prywatnosci.html      │
+   │  CZĘŚĆ 10  POMOCNICZE             drobne klasy do doraźnych zmian  │
+   │  CZĘŚĆ 11  DO MIGRACJI            ręczne dopiski — usuń po zmianie │
+   │                                                                     │
+   └─────────────────────────────────────────────────────────────────────┘
+
+   ┌─ GDZIE SZUKAĆ DANEJ KLASY ─────────────────────────────────────────┐
+   │                                                                     │
+   │  .about .arc .card .claim .facts .goals .grid-3 .hero .portrait     │
+   │  .pull .split .steps .trust                        →  CZĘŚĆ 4      │
+   │                                                                     │
+   │  .price-wrap .p-name .p-cost .p-time .price-meta .tag               │
+   │  table.price tr.is-featured                        →  CZĘŚĆ 5      │
+   │                                                                     │
+   │  .prep .prep-item                                  →  CZĘŚĆ 6      │
+   │                                                                     │
+   │  .book-grid .book-col .booking .cal .cal-day .pill                  │
+   │  .rating .review .reviews .stars                   →  CZĘŚĆ 7      │
+   │                                                                     │
+   │  .addr .contact .field .form .hours .info-list .map                 │
+   │  .consent .form-status                             →  CZĘŚĆ 8      │
+   │                                                                     │
+   │  .doc .doc-body .doc-meta .doc-toc .rules          →  CZĘŚĆ 9      │
+   │                                                                     │
+   └─────────────────────────────────────────────────────────────────────┘
+
+   ┌─ ZASADY PRACY Z TYM PLIKIEM ───────────────────────────────────────┐
+   │                                                                     │
+   │  1. Nowy styl dopisuj do CZĘŚCI odpowiadającej podstronie,          │
+   │     nie na koniec pliku.                                            │
+   │  2. Używaj klas (.nazwa), nie identyfikatorów (#nazwa).             │
+   │     Identyfikator ma specyficzność 1,0,0 i blokuje nadpisanie.      │
+   │  3. Kolory bierz ze zmiennych --nazwa, nie wpisuj wartości HEX.     │
+   │  4. Rozmiary tekstu: clamp(min, płynne, max) zamiast stałych px.    │
+   │  5. Do układu używaj grid albo flex. Bez float.                     │
+   │                                                                     │
+   └─────────────────────────────────────────────────────────────────────┘ */
+
+
+/* ╔═════════════════════════════════════════════════════════════════════╗
+   ║  CZĘŚĆ 1 — FUNDAMENT                                                ║
+   ║  Ładowane na każdej podstronie. Tu nic nie usuwaj.                  ║
+   ╚═════════════════════════════════════════════════════════════════════╝ */
+
+/* ─── 1.1 · Kolory, kroje, wymiary ────────────────────────────────────
    PALETA OPARTA NA DWÓCH KOLORACH BAZOWYCH:
      #56698F  (R86 G105 B143)  — stalowy błękit, kolor marki
      #00A0E3  (R0 G160 B227)   — jasny błękit, kolor akcentu
 
-   WAŻNE: #00A0E3 z białym tekstem daje kontrast 2,94:1, czyli poniżej
-   wymaganych przez WCAG AA 4,5:1. Na przyciskach byłby nieczytelny.
-   Dlatego przyciski używają --accent-d (#0079AE, 4,83:1) — ten sam
-   odcień, tylko przyciemniony. Czysty #00A0E3 pojawia się wszędzie
-   tam, gdzie kontrast na to pozwala: obramowania, ikony, łuk w hero,
-   pierścień focusa i akcenty na ciemnych sekcjach.
-
-   Nazwy zmiennych i klas NIE ZMIENIŁY SIĘ — żadna podstrona nie
-   wymaga edycji. Wyjątki opisane na dole pliku.
-   ═══════════════════════════════════════════════════════════════════════ */
+   UWAGA: #00A0E3 z białym tekstem daje kontrast 2,94:1, czyli poniżej
+   wymaganych przez WCAG AA 4,5:1. Dlatego przyciski używają --accent-d
+   (#0079AE, 4,83:1) — ten sam odcień, tylko przyciemniony. Czysty
+   #00A0E3 pojawia się tam, gdzie kontrast na to pozwala: obramowania,
+   ikony, łuk w hero, pierścień focusa.                                */
 :root{
-  /* ── Kolory bazowe ── */
-  --slate:#56698F;        /* R86 G105 B143 — marka, akcenty na jasnym tle */
-  --accent:#00A0E3;       /* R0 G160 B227 — akcent, obramowania, focus    */
-  --accent-d:#0079AE;     /* przyciski z białym tekstem  (4,83:1)         */
-  --accent-dd:#005E88;    /* hover przycisku             (7,10:1)         */
+  /* Kolory bazowe */
+  --slate:#56698F;        /* marka, akcenty na jasnym tle              */
+  --accent:#00A0E3;       /* akcent, obramowania, focus                */
+  --accent-d:#0079AE;     /* przyciski z białym tekstem      4,83:1    */
+  --accent-dd:#005E88;    /* hover przycisku                 7,10:1    */
 
-  /* ── Tła i linie ── */
-  --paper:#FAFBFD;
-  --mist:#E8EFF7;
-  --mist-2:#D5E1EE;
-  --line:#D8E1EC;
+  /* Tła i linie */
+  --paper:#FAFBFD;        /* tło strony                                */
+  --mist:#E8EFF7;         /* sekcje przełamujące, tło zdjęcia          */
+  --mist-2:#D5E1EE;       /* ramki paneli                              */
+  --line:#D8E1EC;         /* separatory, obramowania pól               */
 
-  /* ── Ciemne powierzchnie ── */
-  --petrol:#3A4763;       /* ciemne sekcje  (biały tekst 9,29:1)          */
-  --petrol-d:#2B3550;     /* stopka, pasek górny        (12,16:1)         */
-  --ink:#1A2233;          /* nagłówki, sekcja CTA       (15,40:1)         */
+  /* Ciemne powierzchnie */
+  --petrol:#3A4763;       /* ciemne sekcje       biały tekst 9,29:1    */
+  --petrol-d:#2B3550;     /* stopka, pasek górny            12,16:1    */
+  --ink:#1A2233;          /* nagłówki, sekcja CTA           15,40:1    */
 
-  /* ── Tekst ── */
-  --body:#41506B;         /* akapity        (7,88:1)                      */
-  --muted:#63748F;        /* podpisy, dane  (4,60:1)                      */
+  /* Tekst */
+  --body:#41506B;         /* akapity                         7,88:1    */
+  --muted:#63748F;        /* podpisy, dane techniczne        4,60:1    */
 
-  /* ── Aliasy zgodności — nazwy używane w regułach poniżej ── */
+  /* Aliasy — nazwy używane w regułach poniżej */
   --tape:var(--accent-d);
   --tape-d:var(--accent-dd);
-  --tape-b:#5BC0EC;       /* jasny akcent na ciemnym tle (4,51:1)         */
-  --tape-s:#E4F4FC;       /* delikatne wypełnienie, np. wiersz cennika    */
+  --tape-b:#5BC0EC;       /* jasny akcent na ciemnym tle     4,51:1    */
+  --tape-s:#E4F4FC;       /* delikatne wypełnienie, np. wiersz cennika */
 
+  /* Kroje pisma */
   --display:'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;
   --sans:'Instrument Sans',ui-sans-serif,system-ui,-apple-system,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
 
-  --wrap:1200px;
-  --sec:clamp(4.5rem,9vw,8rem);
-  --r:10px;
-  --header-h:72px;
+  /* Wymiary */
+  --wrap:1200px;                      /* maksymalna szerokość treści   */
+  --sec:clamp(4.5rem,9vw,8rem);       /* odstęp między sekcjami        */
+  --r:10px;                           /* zaokrąglenie narożników       */
+  --header-h:72px;                    /* wysokość przyklejonego menu   */
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   2. RESET
-   ═══════════════════════════════════════════════════════════════════════ */
+/* ─── 1.2 · Reset ─────────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box}
 *{margin:0}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 16px)}
@@ -76,12 +127,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 
-/* Tekst tylko dla czytników ekranu (np. <caption> tabeli cennika) */
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-
-/* ═══════════════════════════════════════════════════════════════════════
-   3. TYPOGRAFIA
-   ═══════════════════════════════════════════════════════════════════════ */
+/* ─── 1.3 · Typografia ────────────────────────────────────────────── */
 h1,h2,h3,h4{font-family:var(--display);color:var(--ink);line-height:1.08;letter-spacing:-.022em;font-weight:700;text-wrap:balance}
 h1{font-size:clamp(2.4rem,5.8vw,4.2rem);font-weight:800;letter-spacing:-.035em}
 h2{font-size:clamp(1.95rem,3.9vw,3.1rem)}
@@ -89,59 +135,53 @@ h3{font-size:clamp(1.12rem,1.5vw,1.32rem);line-height:1.25}
 h4{font-size:1.02rem;line-height:1.35}
 p{text-wrap:pretty}
 
+/* Nadnagłówek — mała etykieta nad tytułem sekcji */
 .eyebrow{
   font-family:var(--mono);font-size:.72rem;font-weight:500;
   letter-spacing:.16em;text-transform:uppercase;color:var(--tape);
   display:flex;align-items:center;gap:.7rem;margin-bottom:1.1rem;
 }
 .eyebrow::before{content:"";width:26px;height:1px;background:currentColor;flex:none}
-.eyebrow--light{color:var(--tape-b)}
-/* Niewidoczny odstęp — wyrównuje nagłówek kolumny bez własnego eyebrow. */
-.eyebrow--spacer{visibility:hidden}
+.eyebrow--light{color:var(--tape-b)}              /* na ciemnym tle    */
+.eyebrow--spacer{visibility:hidden}               /* wyrównanie kolumn */
 
+/* Akapit wprowadzający pod tytułem sekcji */
 .lede{font-size:clamp(1.05rem,1.45vw,1.24rem);line-height:1.6;color:var(--body)}
+
+/* Nagłówek sekcji */
 .sec-head{max-width:46ch;margin-bottom:clamp(2.5rem,4vw,3.5rem)}
-.sec-head-right{max-width:46ch;margin-bottom:clamp(2.5rem,4vw,3.5rem);margin-left:auto;}
 .sec-head p{margin-top:1.1rem}
+.sec-head-right{max-width:46ch;margin-bottom:clamp(2.5rem,4vw,3.5rem);margin-left:auto}
 
 /* Nagłówek dwukolumnowy: lewa kolumna do lewej krawędzi, prawa do prawej.
    `max-width:none` znosi limit 46ch z .sec-head — bez tego obie kolumny
-   ściskają się w wąskim pasie po lewej stronie sekcji.                   */
+   ściskają się w wąskim pasie po lewej stronie sekcji.                */
 .sec-head--split{
   max-width:none;
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:space-between;
-  align-items:flex-start;
+  display:flex;flex-wrap:wrap;
+  justify-content:space-between;align-items:flex-start;
   gap:clamp(1.75rem,4vw,4rem);
 }
 .sec-head--split>*{
   flex:1 1 320px;      /* poniżej ~720px kolumny zawijają się same     */
   min-width:0;
   max-width:46ch;      /* zachowuje komfortową długość wiersza         */
-  display:flex;
-  flex-direction:column;
+  display:flex;flex-direction:column;
 }
 .sec-head--split>*+*{align-items:flex-start}
 
-/* ═══════════════════════════════════════════════════════════════════════
-   4. UKŁAD
-   ═══════════════════════════════════════════════════════════════════════ */
+/* ─── 1.4 · Siatka i sekcje ───────────────────────────────────────── */
 .wrap{width:min(100% - 2.5rem,var(--wrap));margin-inline:auto}
 @media (max-width:600px){.wrap{width:calc(100% - 2rem)}}
+
 .section{padding-block:var(--sec)}
-.section--mist{background:var(--mist)}
-.section--petrol{background:var(--petrol);color:#CBD7E8}
+.section--mist{background:var(--mist)}                              /* jasne przełamanie */
+.section--petrol{background:var(--petrol);color:#CBD7E8}            /* ciemna sekcja     */
 .section--petrol h2,.section--petrol h3{color:#fff}
-.section--ink{background:var(--ink);color:#B3C0D6}
+.section--ink{background:var(--ink);color:#B3C0D6}                  /* najciemniejsza    */
 .section--ink h2{color:#fff}
 
-.skip{position:absolute;left:1rem;top:-100px;z-index:200;background:var(--tape);color:#fff;padding:.7rem 1.2rem;border-radius:var(--r);text-decoration:none;transition:top .2s}
-.skip:focus{top:1rem;color:#fff}
-
-/* ═══════════════════════════════════════════════════════════════════════
-   5. PRZYCISKI
-   ═══════════════════════════════════════════════════════════════════════ */
+/* ─── 1.5 · Przyciski ─────────────────────────────────────────────── */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:.6rem;
   font-family:var(--sans);font-size:1rem;font-weight:600;line-height:1;
@@ -149,25 +189,39 @@ p{text-wrap:pretty}
   transition:background .18s,color .18s,transform .18s,border-color .18s;white-space:nowrap;
 }
 .btn:active{transform:translateY(1px)}
-.btn--primary{background:var(--tape);color:#fff}
+.btn--primary{background:var(--tape);color:#fff}                    /* główna akcja  */
 .btn--primary:hover{background:var(--tape-d);color:#fff}
 .btn--ghost{border:1.5px solid var(--line);color:var(--ink);background:transparent}
 .btn--ghost:hover{border-color:var(--slate);color:var(--slate);background:#fff}
-.btn--onDark{border:1.5px solid rgba(255,255,255,.28);color:#fff}
+.btn--onDark{border:1.5px solid rgba(255,255,255,.28);color:#fff}   /* na ciemnym tle */
 .btn--onDark:hover{border-color:#fff;background:rgba(255,255,255,.08);color:#fff}
 .btn--sm{padding:.72rem 1.25rem;font-size:.92rem}
 .btn--block{width:100%}
 .btn-row{display:flex;flex-wrap:wrap;gap:.85rem;align-items:center}
 
-/* ═══════════════════════════════════════════════════════════════════════
-   6. PASEK GÓRNY + HEADER
-   ═══════════════════════════════════════════════════════════════════════ */
+/* ─── 1.6 · Dostępność ────────────────────────────────────────────── */
+/* Tekst widoczny tylko dla czytników ekranu */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* Odnośnik „Przejdź do treści" — pojawia się po naciśnięciu Tab */
+.skip{position:absolute;left:1rem;top:-100px;z-index:200;background:var(--tape);color:#fff;padding:.7rem 1.2rem;border-radius:var(--r);text-decoration:none;transition:top .2s}
+.skip:focus{top:1rem;color:#fff}
+
+
+/* ╔═════════════════════════════════════════════════════════════════════╗
+   ║  CZĘŚĆ 2 — SZKIELET STRONY                                          ║
+   ║  Pasek górny, menu, stopka, belka mobilna, animacja wejścia.        ║
+   ║  Obecne na każdej podstronie.                                       ║
+   ╚═════════════════════════════════════════════════════════════════════╝ */
+
+/* ─── 2.1 · Pasek górny (adres i telefon) ─────────────────────────── */
 .topbar{background:var(--petrol-d);color:#9CACC8;font-family:var(--mono);font-size:.73rem;letter-spacing:.03em;padding:.55rem 0}
 .topbar .wrap{display:flex;gap:1.6rem;flex-wrap:wrap;justify-content:center}
 .topbar a{color:#C9D6E9;text-decoration:none}
 .topbar a:hover{color:#fff}
-@media (max-width:760px){.topbar{display:none}}
+@media (max-width:760px){.topbar{display:none}}        /* ukryty na telefonie */
 
+/* ─── 2.2 · Nagłówek przyklejony ──────────────────────────────────── */
 .header{
   position:sticky;top:0;z-index:100;background:rgba(250,251,253,.92);
   backdrop-filter:blur(10px);border-bottom:1px solid transparent;
@@ -176,22 +230,26 @@ p{text-wrap:pretty}
 .header.is-stuck{border-bottom-color:var(--line);box-shadow:0 6px 24px -18px rgba(58,71,99,.5)}
 .header .wrap{display:flex;align-items:center;gap:1.5rem;height:var(--header-h)}
 
+/* ─── 2.3 · Logo ──────────────────────────────────────────────────── */
 .brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;margin-right:auto;flex:none}
 .brand-mark{width:34px;height:34px;flex:none}
 .brand-txt{display:flex;flex-direction:column;line-height:1.05}
 .brand-name{font-family:var(--display);font-weight:800;font-size:1.06rem;color:var(--ink);letter-spacing:-.02em}
 .brand-sub{font-family:var(--mono);font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
 
+/* ─── 2.4 · Menu na desktopie ─────────────────────────────────────── */
 .nav{display:flex;gap:.2rem}
 .nav a{font-size:.93rem;font-weight:500;color:var(--body);text-decoration:none;padding:.5rem .68rem;border-radius:7px;transition:color .16s,background .16s}
 .nav a:hover{color:var(--ink);background:var(--mist)}
-.nav a.is-active{color:var(--tape)}
+.nav a.is-active{color:var(--tape)}      /* bieżąca sekcja lub podstrona */
 @media (max-width:1080px){.nav{display:none}}
 
+/* ─── 2.5 · Menu mobilne ──────────────────────────────────────────── */
 .burger{display:none;width:44px;height:44px;border:1.5px solid var(--line);border-radius:9px;align-items:center;justify-content:center;flex:none}
 .burger span{display:block;width:18px;height:1.8px;background:var(--ink);position:relative;transition:background .25s}
 .burger span::before,.burger span::after{content:"";position:absolute;left:0;width:18px;height:1.8px;background:var(--ink);transition:transform .25s}
-.burger span::before{top:-6px}.burger span::after{top:6px}
+.burger span::before{top:-6px}
+.burger span::after{top:6px}
 .burger[aria-expanded="true"] span{background:transparent}
 .burger[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
 .burger[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
@@ -206,18 +264,107 @@ p{text-wrap:pretty}
 .mobile-nav a{display:block;font-family:var(--display);font-size:1.42rem;font-weight:600;color:var(--ink);text-decoration:none;padding:.85rem 0;border-bottom:1px solid var(--line)}
 .mobile-nav .btn{margin-top:1.8rem}
 
-/* ═══════════════════════════════════════════════════════════════════════
-   7. HERO  ·  sygnatura: łuk goniometru (pomiar zakresu ruchu)
-   ═══════════════════════════════════════════════════════════════════════ */
+/* ─── 2.6 · Stopka ────────────────────────────────────────────────── */
+.footer{background:var(--petrol-d);color:#93A3C0;padding-block:clamp(3rem,5vw,4.5rem) 0;font-size:.92rem}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2.5rem}
+@media (max-width:860px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.footer-grid{grid-template-columns:1fr}}
+.footer h4{color:#fff;font-family:var(--mono);font-size:.67rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.1rem}
+.footer a{color:#BAC8DF;text-decoration:none}
+.footer a:hover{color:#fff;text-decoration:underline}
+.footer ul{list-style:none;padding:0;margin:0;display:grid;gap:.55rem}
+.footer-brand p{margin-top:.8rem;line-height:1.65;max-width:34ch}
+.footer-pwz{font-family:var(--mono);font-size:.71rem;letter-spacing:.05em;margin-top:1rem;color:#8FA0BE}
+.footer-bottom{margin-top:3rem;padding:1.5rem 0;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;gap:.6rem 1.5rem;justify-content:space-between;font-family:var(--mono);font-size:.71rem;letter-spacing:.04em;color:#8FA0BE}
+
+/* ─── 2.7 · Belka akcji na telefonie ──────────────────────────────── */
+/* Przyklejona do dołu ekranu. Zwykle najskuteczniejszy przycisk na stronie. */
+.mobile-cta{
+  position:fixed;left:0;right:0;bottom:0;z-index:95;display:none;gap:.6rem;
+  padding:.7rem .9rem calc(.7rem + env(safe-area-inset-bottom));
+  background:rgba(250,251,253,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);
+}
+.mobile-cta .btn{flex:1;padding:.95rem 1rem;font-size:.95rem}
+@media (max-width:760px){.mobile-cta{display:flex}body{padding-bottom:78px}}
+
+/* ─── 2.8 · Animacja wejścia sekcji ───────────────────────────────── */
+/* Element z klasą .reveal jest ukryty, dopóki skrypt.js nie doda .is-in. */
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s cubic-bezier(.22,.85,.3,1),transform .65s cubic-bezier(.22,.85,.3,1)}
+.js .reveal.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none}}
+
+
+/* ╔═════════════════════════════════════════════════════════════════════╗
+   ║  CZĘŚĆ 3 — KOMPONENTY WSPÓLNE                                       ║
+   ║  Używane na więcej niż jednej podstronie.                           ║
+   ╚═════════════════════════════════════════════════════════════════════╝ */
+
+/* ─── 3.1 · Ramka z uwagą ─────────────────────────────────────────────
+   Gdzie: index.html (pod metodami), regulamin.html (§6)               */
+.note{margin-top:1.6rem;font-size:.95rem;color:var(--muted);border-left:2px solid var(--accent);padding-left:1.1rem}
+
+/* ─── 3.2 · Ramka ostrzegawcza ────────────────────────────────────────
+   Gdzie: kontakt.html (RODO przy formularzu), regulamin.html (opłata)  */
+.warn{background:var(--tape-s);border-radius:8px;padding:.9rem 1.1rem;font-size:.86rem;line-height:1.55;color:var(--ink)}
+
+/* ─── 3.3 · Miejsce na zdjęcie ────────────────────────────────────────
+   Placeholder do podmiany na <img>. Gdzie: index.html (sekcja O mnie)  */
+.photo{
+  background:#fff;border:1px dashed var(--mist-2);border-radius:var(--r);
+  display:grid;place-content:center;text-align:center;padding:2rem 1.25rem;color:var(--muted);
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.11em;text-transform:uppercase;
+}
+.photo b{display:block;color:var(--slate);font-size:.78rem;margin-bottom:.4rem;letter-spacing:.08em}
+.photo--portrait{aspect-ratio:3/4}
+
+/* ─── 3.4 · Miejsce na widget zewnętrzny ──────────────────────────────
+   Gdzie: rezerwacja.html (Booksy, opinie Google)                       */
+.widget-slot{
+  border:1px dashed var(--mist-2);border-radius:var(--r);background:var(--mist);
+  padding:2.4rem 1.5rem;text-align:center;color:var(--muted);
+  font-family:var(--mono);font-size:.75rem;letter-spacing:.07em;line-height:1.8;
+}
+.widget-slot b{display:block;color:var(--slate);font-size:.85rem;margin-bottom:.5rem;letter-spacing:.1em;text-transform:uppercase}
+.section--petrol .widget-slot{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.24);color:#9CACC8}
+.section--petrol .widget-slot b{color:#fff}
+
+/* ─── 3.5 · Akordeon pytań ────────────────────────────────────────────
+   Zbudowany na <details>/<summary> — działa też bez JavaScriptu.
+   Gdzie: index.html, kontakt.html                                      */
+.faq{max-width:860px;margin-inline:auto;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{
+  list-style:none;cursor:pointer;padding:1.35rem 3rem 1.35rem 0;position:relative;
+  font-family:var(--display);font-weight:600;font-size:clamp(1.02rem,1.5vw,1.15rem);
+  color:var(--ink);line-height:1.4;transition:color .18s;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{color:var(--tape)}
+.faq summary::after{content:"";position:absolute;right:.35rem;top:1.75rem;width:13px;height:13px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg);transition:transform .22s}
+.faq details[open] summary::after{transform:rotate(-135deg);top:1.95rem}
+.faq-a{padding:0 3rem 1.5rem 0;font-size:.97rem;line-height:1.7}
+
+/* ─── 3.6 · Sekcja domykająca z wezwaniem do działania ────────────────
+   Gdzie: index.html, może trafić na dowolną podstronę                  */
+.final{text-align:center;max-width:680px;margin-inline:auto}
+.final .btn-row{justify-content:center;margin-top:2rem}
+.final p{margin-top:1.2rem;color:#9CA9C5}
+
+
+/* ╔═════════════════════════════════════════════════════════════════════╗
+   ║  CZĘŚĆ 4 — index.html  ·  STRONA GŁÓWNA                             ║
+   ╚═════════════════════════════════════════════════════════════════════╝ */
+
+/* ─── 4.1 · Sekcja powitalna ──────────────────────────────────────── */
 .hero{padding-block:clamp(2.75rem,5.5vw,5rem) clamp(3.5rem,7vw,6.5rem);overflow:hidden}
 .hero .wrap{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
 @media (max-width:920px){.hero .wrap{grid-template-columns:1fr;gap:2.75rem}}
-
 .hero h1{margin-bottom:1.4rem}
-.hero h1 em{font-style:normal;color:var(--tape)}
+.hero h1 em{font-style:normal;color:var(--tape)}     /* wyróżniony fragment */
 .hero .lede{max-width:47ch;margin-bottom:2.1rem}
 .hero .btn-row{margin-bottom:2.2rem}
 
+/* Pasek zaufania pod przyciskami */
 .trust{
   display:flex;flex-wrap:wrap;gap:.55rem 1.5rem;
   font-family:var(--mono);font-size:.75rem;letter-spacing:.04em;color:var(--muted);
@@ -225,6 +372,9 @@ p{text-wrap:pretty}
 }
 .trust b{color:var(--ink);font-weight:700}
 
+/* ─── 4.2 · Łuk goniometru — znak rozpoznawczy strony ─────────────────
+   Odwzorowuje narzędzie do pomiaru zakresu ruchu. Rysuje się przy
+   wczytaniu strony. Występuje tylko tutaj — to celowe.                */
 .hero-visual{position:relative}
 .arc{position:absolute;left:-16%;bottom:-8%;width:76%;max-width:430px;height:auto;pointer-events:none;color:var(--slate);z-index:0}
 .arc-path{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.35;stroke-dasharray:613;stroke-dashoffset:613;animation:sweep 1.7s .25s cubic-bezier(.22,.85,.3,1) forwards}
@@ -237,12 +387,14 @@ p{text-wrap:pretty}
 @keyframes tickInMajor{to{opacity:1}}
 @media (prefers-reduced-motion:reduce){
   .arc-path{stroke-dashoffset:0}
-  .arc line{opacity:.55}.arc line.major{opacity:1}.arc text{opacity:.55}
+  .arc line{opacity:.55}
+  .arc line.major{opacity:1}
+  .arc text{opacity:.55}
 }
 
-/* Panel portretowy — tło zdjęcia jest wtopione w --mist, więc portret
-   nie ma widocznej krawędzi. Plik img/portret-hero.jpg został już
-   przeliczony na nowy odcień #E8EFF7.                                    */
+/* ─── 4.3 · Portret w sekcji powitalnej ───────────────────────────────
+   Tło zdjęcia jest wtopione w --mist, więc portret nie ma widocznej
+   krawędzi. Plik img/portret-hero.jpg jest już przeliczony na #E8EFF7. */
 .portrait{
   position:relative;z-index:2;width:86%;margin-left:auto;
   background:var(--mist);border:1px solid var(--mist-2);border-radius:var(--r);
@@ -256,23 +408,22 @@ p{text-wrap:pretty}
   font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#CDD9EA;
 }
 .portrait figcaption b{display:block;font-family:var(--sans);font-size:.98rem;letter-spacing:0;text-transform:none;color:#fff;margin-bottom:.12rem}
-@media (max-width:920px){.portrait{width:100%;max-width:400px;margin-inline:auto}.arc{left:-6%;width:56%}}
+@media (max-width:920px){
+  .portrait{width:100%;max-width:400px;margin-inline:auto}
+  .arc{left:-6%;width:56%}
+}
 
-/* ═══════════════════════════════════════════════════════════════════════
-   8. PASEK FAKTÓW
-   ═══════════════════════════════════════════════════════════════════════ */
+/* ─── 4.4 · Pasek faktów ──────────────────────────────────────────── */
 .facts{background:var(--petrol);color:#BAC8DF}
 .facts .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.15)}
-.fact{background:var(--petrol);padding:2.1rem 1.6rem}
+.fact{background:var(--petrol);padding:2.1rem 1.6rem}   /* 1px przerwy tworzy linie */
 .fact-n{font-family:var(--mono);font-size:1.5rem;font-weight:700;color:#fff;letter-spacing:-.02em;display:block;margin-bottom:.5rem}
 .fact-n small{font-size:.82rem;font-weight:500;color:var(--tape-b);letter-spacing:.05em}
 .fact p{font-size:.9rem;line-height:1.55}
 @media (max-width:820px){.facts .wrap{grid-template-columns:1fr 1fr}}
 @media (max-width:480px){.facts .wrap{grid-template-columns:1fr}}
 
-/* ═══════════════════════════════════════════════════════════════════════
-   9. DLA KOGO
-   ═══════════════════════════════════════════════════════════════════════ */
+/* ─── 4.5 · Sekcja „Dla kogo" ─────────────────────────────────────── */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
 @media (max-width:880px){.split{grid-template-columns:1fr}}
 .claim{
@@ -281,16 +432,11 @@ p{text-wrap:pretty}
 }
 .claim em{font-style:normal;color:var(--tape)}
 .goals{list-style:none;padding:0;margin:0;display:grid;gap:0;border-top:1px solid var(--line)}
-.goals li{
-  display:grid;grid-template-columns:auto 1fr;gap:1.1rem;align-items:baseline;
-  padding:1.1rem 0;border-bottom:1px solid var(--line);
-}
+.goals li{display:grid;grid-template-columns:auto 1fr;gap:1.1rem;align-items:baseline;padding:1.1rem 0;border-bottom:1px solid var(--line)}
 .goals b{font-family:var(--mono);font-size:.72rem;font-weight:500;letter-spacing:.12em;color:var(--tape)}
 .goals span{font-size:1rem;color:var(--ink);font-weight:500}
 
-/* ═══════════════════════════════════════════════════════════════════════
-   10. METODY — karty
-   ═══════════════════════════════════════════════════════════════════════ */
+/* ─── 4.6 · Karty metod terapii ───────────────────────────────────── */
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.15rem}
 @media (max-width:940px){.grid-3{grid-template-columns:1fr 1fr}}
 @media (max-width:620px){.grid-3{grid-template-columns:1fr}}
@@ -305,6 +451,8 @@ p{text-wrap:pretty}
 .card p{font-size:.93rem;line-height:1.6;color:var(--body)}
 .card-ico{width:28px;height:28px;color:var(--slate);margin-bottom:1rem;transition:color .2s}
 .card:hover .card-ico{color:var(--accent)}
+
+/* Karta na całą szerokość — „Terapia kompleksowa" */
 .card--wide{grid-column:1/-1;background:var(--petrol);border-color:var(--petrol);display:grid;grid-template-columns:auto 1fr;gap:1.6rem;align-items:center;padding:1.9rem 1.8rem}
 .card--wide:hover{transform:none;box-shadow:none;border-color:var(--petrol)}
 .card--wide .card-ico{color:var(--tape-b);margin:0;width:34px;height:34px}
@@ -312,57 +460,60 @@ p{text-wrap:pretty}
 .card--wide p{color:#B4C3DC;margin:0}
 @media (max-width:620px){.card--wide{grid-template-columns:1fr;gap:1rem}}
 
-.note{margin-top:1.6rem;font-size:.95rem;color:var(--muted);border-left:2px solid var(--accent);padding-left:1.1rem}
-
-/* ═══════════════════════════════════════════════════════════════════════
-   11. O MNIE
-   ═══════════════════════════════════════════════════════════════════════ */
+/* ─── 4.7 · Sekcja „O mnie" ───────────────────────────────────────── */
 .about{display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(2rem,5vw,4.5rem);align-items:start}
 @media (max-width:900px){.about{grid-template-columns:1fr}}
-.photo{
-  background:#fff;border:1px dashed var(--mist-2);border-radius:var(--r);
-  display:grid;place-content:center;text-align:center;padding:2rem 1.25rem;color:var(--muted);
-  font-family:var(--mono);font-size:.68rem;letter-spacing:.11em;text-transform:uppercase;
-}
-.photo b{display:block;color:var(--slate);font-size:.78rem;margin-bottom:.4rem;letter-spacing:.08em}
-.photo--portrait{aspect-ratio:3/4}
 .about-body>p{margin-bottom:1.15rem}
+
+/* Zdanie wyróżnione większym krojem */
 .pull{
   font-family:var(--display);font-size:clamp(1.25rem,2.2vw,1.65rem);font-weight:600;
   line-height:1.3;color:var(--ink);letter-spacing:-.02em;
   border-left:3px solid var(--accent);padding-left:1.4rem;margin:1.9rem 0;
 }
+
+/* Lista certyfikatów */
 .creds{list-style:none;padding:0;margin:1.8rem 0;display:grid;gap:.55rem}
 .creds li{position:relative;padding-left:1.6rem;font-size:.95rem}
 .creds li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:9px;border:1.8px solid var(--accent);border-radius:50%}
 
-/* ═══════════════════════════════════════════════════════════════════════
-   12. PRZEBIEG WIZYTY
-   ═══════════════════════════════════════════════════════════════════════ */
+/* ─── 4.8 · Przebieg wizyty ───────────────────────────────────────────
+   Zamiast numerów 01/02/03 używamy znaczników czasu — pacjent od razu
+   widzi, na co idą minuty wizyty.                                     */
 .steps{border-top:1px solid var(--line)}
 .step{display:grid;grid-template-columns:140px 1fr;gap:clamp(1.2rem,4vw,3.5rem);padding:2rem 0;border-bottom:1px solid var(--line);align-items:baseline}
 .step-t{font-family:var(--mono);font-size:.84rem;font-weight:700;color:var(--tape);letter-spacing:.02em;padding-top:.15rem}
 .step-t small{display:block;font-weight:400;color:var(--muted);font-size:.71rem;letter-spacing:.09em;text-transform:uppercase;margin-top:.3rem}
 .step h3{margin-bottom:.5rem}
 .step p{font-size:.97rem}
-@media (max-width:640px){.step{grid-template-columns:1fr;gap:.55rem;padding:1.6rem 0}.step-t small{display:inline;margin-left:.6rem}}
+@media (max-width:640px){
+  .step{grid-template-columns:1fr;gap:.55rem;padding:1.6rem 0}
+  .step-t small{display:inline;margin-left:.6rem}
+}
 
-/* ═══════════════════════════════════════════════════════════════════════
-   13. CENNIK
-   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ╔═════════════════════════════════════════════════════════════════════╗
+   ║  CZĘŚĆ 5 — cennik.html                                              ║
+   ╚═════════════════════════════════════════════════════════════════════╝ */
+
 .price-wrap{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff}
 table.price{width:100%;border-collapse:collapse}
 table.price th,table.price td{padding:1.15rem 1.5rem;text-align:left;border-bottom:1px solid var(--line)}
 table.price thead th{font-family:var(--mono);font-size:.67rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);background:var(--mist)}
 table.price tbody tr:last-child td{border-bottom:0}
+
 .p-name{font-weight:600;color:var(--ink)}
 .p-name small{display:block;font-weight:400;font-size:.86rem;color:var(--muted);margin-top:.2rem;line-height:1.45}
 .p-time,.p-cost{font-family:var(--mono);white-space:nowrap}
 .p-time{color:var(--muted);font-size:.9rem}
 .p-cost{font-weight:700;color:var(--ink);font-size:1.06rem;text-align:right}
+
+/* Wyróżniony wiersz — pierwsza wizyta */
 tr.is-featured td{background:var(--tape-s)}
 tr.is-featured .p-cost{color:var(--tape)}
 .tag{display:inline-block;font-family:var(--mono);font-size:.59rem;letter-spacing:.14em;text-transform:uppercase;background:var(--tape);color:#fff;padding:.2rem .5rem;border-radius:4px;margin-left:.6rem;vertical-align:2px}
+
+/* Na telefonie tabela zamienia się w karty — bez przewijania w bok */
 @media (max-width:680px){
   table.price thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
   table.price tr{display:block;border-bottom:1px solid var(--line);padding:1.2rem 1.3rem}
@@ -371,14 +522,18 @@ tr.is-featured .p-cost{color:var(--tape)}
   .p-time{margin-top:.45rem}
   .p-cost{text-align:left;margin-top:.35rem;font-size:1.25rem}
 }
+
+/* Informacje pod tabelą: płatność, odwoływanie wizyt */
 .price-meta{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.8rem}
 @media (max-width:680px){.price-meta{grid-template-columns:1fr}}
 .price-meta h4{margin-bottom:.4rem}
 .price-meta p{font-size:.93rem}
 
-/* ═══════════════════════════════════════════════════════════════════════
-   14. PIERWSZA WIZYTA
-   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ╔═════════════════════════════════════════════════════════════════════╗
+   ║  CZĘŚĆ 6 — pierwszawizyta.html                                      ║
+   ╚═════════════════════════════════════════════════════════════════════╝ */
+
 .prep{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem}
 @media (max-width:900px){.prep{grid-template-columns:1fr 1fr}}
 @media (max-width:540px){.prep{grid-template-columns:1fr}}
@@ -386,79 +541,36 @@ tr.is-featured .p-cost{color:var(--tape)}
 .prep-item h4{margin-bottom:.5rem}
 .prep-item p{font-size:.93rem;line-height:1.6}
 
-/* ═══════════════════════════════════════════════════════════════════════
-   15. OPINIE
-   ═══════════════════════════════════════════════════════════════════════ */
-.rating{display:flex;align-items:baseline;gap:.75rem;margin-bottom:1.5rem;flex-wrap:wrap}
-.rating-n{font-family:var(--display);font-size:2.6rem;font-weight:800;color:var(--ink);line-height:1;letter-spacing:-.04em}
-.stars{color:var(--accent);letter-spacing:.15em;font-size:1rem}
-.rating span{font-family:var(--mono);font-size:.76rem;color:var(--muted)}
 
-.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:1.15rem}
-@media (max-width:940px){.reviews{grid-template-columns:1fr 1fr}}
-@media (max-width:640px){.reviews{grid-template-columns:1fr}}
+/* ╔═════════════════════════════════════════════════════════════════════╗
+   ║  CZĘŚĆ 7 — rezerwacja.html  ·  KALENDARZ + OPINIE                   ║
+   ║  Wymaga też pliku kalendarz.js.                                     ║
+   ╚═════════════════════════════════════════════════════════════════════╝ */
 
-.review{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.7rem}
-.review blockquote{margin:0 0 1.2rem;font-size:.97rem;line-height:1.62;color:var(--ink)}
-.review footer{font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;color:var(--muted)}
-.review footer b{display:block;color:var(--ink);font-size:.85rem;font-family:var(--sans);letter-spacing:0;margin-bottom:.15rem}
-
-/* Wariant pionowy — opinie w wąskiej kolumnie obok kalendarza.
-   Podwójna klasa, żeby wygrać z regułami @media powyżej bez !important. */
-.reviews.reviews--stack{grid-template-columns:1fr;gap:.85rem}
-.reviews--stack .review{padding:1.25rem 1.35rem}
-.reviews--stack blockquote{margin-bottom:.9rem;font-size:.93rem}
-
-/* Warianty na ciemnym tle */
-.section--petrol .rating-n{color:#fff}
-.section--petrol .stars{color:var(--tape-b)}
-.section--petrol .rating span{color:#9CACC8}
-.section--petrol .review{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.16)}
-.section--petrol .review blockquote{color:#CBD7E8}
-.section--petrol .review footer{color:#8FA0BE}
-.section--petrol .review footer b{color:#fff}
-
-.widget-slot{
-  border:1px dashed var(--mist-2);border-radius:var(--r);background:var(--mist);
-  padding:2.4rem 1.5rem;text-align:center;color:var(--muted);
-  font-family:var(--mono);font-size:.75rem;letter-spacing:.07em;line-height:1.8;
-}
-.widget-slot b{display:block;color:var(--slate);font-size:.85rem;margin-bottom:.5rem;letter-spacing:.1em;text-transform:uppercase}
-.section--petrol .widget-slot{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.24);color:#9CACC8}
-.section--petrol .widget-slot b{color:#fff}
-
-/* ═══════════════════════════════════════════════════════════════════════
-   16. REZERWACJA + OPINIE — siatka dwukolumnowa
-   ═══════════════════════════════════════════════════════════════════════ */
-.book-grid{
-  display:grid;grid-template-columns:1.12fr .88fr;
-  gap:clamp(2rem,4.5vw,4rem);align-items:start;
-}
+/* ─── 7.1 · Układ dwukolumnowy: kalendarz | opinie ────────────────── */
+.book-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(2rem,4.5vw,4rem);align-items:start}
 @media (max-width:960px){.book-grid{grid-template-columns:1fr;gap:3.25rem}}
-
 .book-col{min-width:0}
 .book-col h2{font-size:clamp(1.7rem,2.7vw,2.3rem);margin-bottom:.85rem}
 .book-lede{color:#B4C3DC;font-size:1.02rem;line-height:1.6;margin-bottom:1.9rem;max-width:44ch}
 .book-col .widget-slot{padding:1.3rem 1.1rem;font-size:.72rem;line-height:1.65;margin-top:.85rem;text-align:left}
 .book-col .widget-slot b{margin-bottom:.35rem}
-
 .booking-alt{margin-top:1.5rem;font-size:.92rem;line-height:1.6;color:#9CACC8}
 .booking-alt a{color:#fff;font-weight:600}
 
-/* Stary układ wyśrodkowany — zostaje, gdyby sekcja wróciła bez opinii */
+/* Wariant wyśrodkowany — gdyby sekcja miała działać bez kolumny opinii */
 .booking{text-align:center;max-width:760px;margin-inline:auto}
 .booking .eyebrow{justify-content:center}
 .booking h2{margin-bottom:1rem}
 .booking>p{margin-bottom:2.4rem;color:#B4C3DC}
 
-/* ═══════════════════════════════════════════════════════════════════════
-   16b. KALENDARZ REZERWACJI
-   ═══════════════════════════════════════════════════════════════════════ */
+/* ─── 7.2 · Kalendarz — panel ─────────────────────────────────────── */
 .cal{background:var(--paper);border-radius:12px;padding:clamp(1.2rem,2.5vw,1.85rem);text-align:left;color:var(--body)}
 .cal-lbl{font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.7rem}
 .cal-lbl b{color:var(--tape);font-weight:500;margin-right:.4rem}
 .cal-block+.cal-block{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--line)}
 
+/* ─── 7.3 · Kalendarz — pigułki wyboru ────────────────────────────── */
 .pills{display:flex;flex-wrap:wrap;gap:.5rem}
 .pill{
   font-size:.9rem;font-weight:500;padding:.58rem .95rem;border-radius:999px;
@@ -468,6 +580,7 @@ tr.is-featured .p-cost{color:var(--tape)}
 .pill:hover{border-color:var(--accent)}
 .pill[aria-pressed="true"]{background:var(--tape);border-color:var(--tape);color:#fff}
 
+/* ─── 7.4 · Kalendarz — siatka miesiąca ───────────────────────────── */
 .cal-nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.9rem}
 .cal-month{font-family:var(--display);font-weight:600;font-size:1.1rem;color:var(--ink);letter-spacing:-.02em}
 .cal-arrow{
@@ -479,45 +592,73 @@ tr.is-featured .p-cost{color:var(--tape)}
 .cal-arrow:disabled{opacity:.3;cursor:not-allowed}
 
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
-.cal-dow{
-  font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--muted);text-align:center;padding-bottom:.4rem;
-}
+.cal-dow{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center;padding-bottom:.4rem}
 .cal-day{
   aspect-ratio:1;border-radius:8px;border:1.5px solid transparent;background:transparent;
   font-family:var(--mono);font-size:.88rem;color:var(--ink);
   display:grid;place-content:center;position:relative;
   transition:background .16s,border-color .16s,color .16s;
 }
-.cal-day.open{background:var(--mist);color:var(--petrol)}
+.cal-day.open{background:var(--mist);color:var(--petrol)}   /* dzień przyjęć  */
 .cal-day.open:hover{border-color:var(--accent)}
 .cal-day[aria-pressed="true"]{background:var(--tape);border-color:var(--tape);color:#fff}
 .cal-day:disabled{background:transparent;color:var(--line);cursor:not-allowed}
 .cal-day.is-today::after{content:"";position:absolute;bottom:5px;width:4px;height:4px;border-radius:50%;background:var(--accent)}
 .cal-day[aria-pressed="true"].is-today::after{background:#fff}
-.cal-day.pad{visibility:hidden}
+.cal-day.pad{visibility:hidden}                              /* puste pola przed 1. dniem */
 
+/* ─── 7.5 · Kalendarz — legenda i podsumowanie ────────────────────── */
 .cal-legend{display:flex;gap:1.1rem;flex-wrap:wrap;margin-top:.8rem;font-size:.78rem;color:var(--muted)}
 .cal-legend span{display:flex;align-items:center;gap:.4rem}
 .cal-key{width:12px;height:12px;border-radius:3px;background:var(--mist);flex:none}
 .cal-key.busy{background:var(--tape)}
-
-.cal-sum{
-  margin-top:1.5rem;padding:1rem 1.15rem;background:var(--mist);border-radius:8px;
-  font-size:.94rem;line-height:1.6;color:var(--ink);
-}
+.cal-sum{margin-top:1.5rem;padding:1rem 1.15rem;background:var(--mist);border-radius:8px;font-size:.94rem;line-height:1.6;color:var(--ink)}
 .cal-sum b{font-weight:600}
 .cal-sum .hint{display:block;font-size:.85rem;color:var(--muted);margin-top:.3rem}
 .cal-go{margin-top:1.1rem}
 .cal-msg{font-size:.88rem;color:var(--tape);margin-top:.7rem;min-height:1.2em}
 
-/* ═══════════════════════════════════════════════════════════════════════
-   17. LOKALIZACJA
-   ═══════════════════════════════════════════════════════════════════════ */
+/* ─── 7.6 · Opinie pacjentów ──────────────────────────────────────── */
+.rating{display:flex;align-items:baseline;gap:.75rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.rating-n{font-family:var(--display);font-size:2.6rem;font-weight:800;color:var(--ink);line-height:1;letter-spacing:-.04em}
+.stars{color:var(--accent);letter-spacing:.15em;font-size:1rem}
+.rating span{font-family:var(--mono);font-size:.76rem;color:var(--muted)}
+
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:1.15rem}
+@media (max-width:940px){.reviews{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.reviews{grid-template-columns:1fr}}
+.review{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.7rem}
+.review blockquote{margin:0 0 1.2rem;font-size:.97rem;line-height:1.62;color:var(--ink)}
+.review footer{font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;color:var(--muted)}
+.review footer b{display:block;color:var(--ink);font-size:.85rem;font-family:var(--sans);letter-spacing:0;margin-bottom:.15rem}
+
+/* Wariant pionowy — opinie w wąskiej kolumnie obok kalendarza.
+   Podwójna klasa wygrywa z regułami @media powyżej bez !important. */
+.reviews.reviews--stack{grid-template-columns:1fr;gap:.85rem}
+.reviews--stack .review{padding:1.25rem 1.35rem}
+.reviews--stack blockquote{margin-bottom:.9rem;font-size:.93rem}
+
+/* Opinie na ciemnym tle */
+.section--petrol .rating-n{color:#fff}
+.section--petrol .stars{color:var(--tape-b)}
+.section--petrol .rating span{color:#9CACC8}
+.section--petrol .review{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.16)}
+.section--petrol .review blockquote{color:#CBD7E8}
+.section--petrol .review footer{color:#8FA0BE}
+.section--petrol .review footer b{color:#fff}
+
+
+/* ╔═════════════════════════════════════════════════════════════════════╗
+   ║  CZĘŚĆ 8 — kontakt.html                                             ║
+   ╚═════════════════════════════════════════════════════════════════════╝ */
+
+/* ─── 8.1 · Układ: mapa + dane ────────────────────────────────────── */
 .contact{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,3.5rem);align-items:start}
 @media (max-width:900px){.contact{grid-template-columns:1fr}}
 .map{aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:var(--mist)}
 .map iframe{width:100%;height:100%;border:0;display:block}
+
+/* ─── 8.2 · Adres i informacje o dojeździe ────────────────────────── */
 .addr{font-style:normal;font-size:1.02rem;line-height:1.75;margin-bottom:1.6rem}
 .addr strong{color:var(--ink)}
 .addr a{font-weight:600}
@@ -525,21 +666,22 @@ tr.is-featured .p-cost{color:var(--tape)}
 .info-list li{display:grid;grid-template-columns:100px 1fr;gap:1rem;font-size:.94rem;padding-bottom:.85rem;border-bottom:1px solid var(--line)}
 .info-list b{font-family:var(--mono);font-size:.69rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;padding-top:.28em}
 @media (max-width:420px){.info-list li{grid-template-columns:1fr;gap:.15rem}}
+
+/* ─── 8.3 · Godziny otwarcia ──────────────────────────────────────────
+   Klasę .today dodaje skrypt.js do bieżącego dnia tygodnia.           */
 .hours{list-style:none;padding:0;margin:0;font-family:var(--mono);font-size:.87rem}
 .hours li{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 0;border-bottom:1px solid var(--line)}
 .hours li:last-child{border-bottom:0}
 .hours .closed{color:var(--muted)}
 .hours .today{color:var(--tape);font-weight:700}
 
-/* ═══════════════════════════════════════════════════════════════════════
-   18. FORMULARZ
-   ═══════════════════════════════════════════════════════════════════════ */
+/* ─── 8.4 · Formularz kontaktowy ──────────────────────────────────── */
 .form{display:grid;gap:1.1rem;margin-top:2.5rem;padding-top:2.5rem;border-top:1px solid var(--line)}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
 @media (max-width:560px){.form-row{grid-template-columns:1fr}}
 .field{display:grid;gap:.4rem}
 .field label{font-size:.88rem;font-weight:600;color:var(--ink)}
-.field .req{color:var(--tape)}
+.field .req{color:var(--tape)}      /* gwiazdka przy polu wymaganym */
 .field input,.field select,.field textarea{
   font:inherit;font-size:.98rem;padding:.85rem 1rem;border:1.5px solid var(--line);
   border-radius:8px;background:#fff;color:var(--ink);transition:border-color .18s;width:100%;
@@ -547,94 +689,45 @@ tr.is-featured .p-cost{color:var(--tape)}
 .field textarea{resize:vertical;min-height:130px;line-height:1.6}
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);outline:none}
 .field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px}
+
+/* Zgoda RODO — wymagana prawnie przy zbieraniu danych */
 .consent{display:grid;grid-template-columns:auto 1fr;gap:.75rem;align-items:start;font-size:.86rem;line-height:1.55;color:var(--muted)}
 .consent input{width:19px;height:19px;margin-top:.2em;accent-color:var(--tape);flex:none}
-.warn{background:var(--tape-s);border-radius:8px;padding:.9rem 1.1rem;font-size:.86rem;line-height:1.55;color:var(--ink)}
 .form-status{font-size:.92rem;font-weight:600;color:var(--petrol)}
 
-/* ═══════════════════════════════════════════════════════════════════════
-   19. FAQ
-   ═══════════════════════════════════════════════════════════════════════ */
-.faq{max-width:860px;margin-inline:auto;border-top:1px solid var(--line)}
-.faq details{border-bottom:1px solid var(--line)}
-.faq summary{
-  list-style:none;cursor:pointer;padding:1.35rem 3rem 1.35rem 0;position:relative;
-  font-family:var(--display);font-weight:600;font-size:clamp(1.02rem,1.5vw,1.15rem);
-  color:var(--ink);line-height:1.4;transition:color .18s;
-}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary:hover{color:var(--tape)}
-.faq summary::after{content:"";position:absolute;right:.35rem;top:1.75rem;width:13px;height:13px;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg);transition:transform .22s}
-.faq details[open] summary::after{transform:rotate(-135deg);top:1.95rem}
-.faq-a{padding:0 3rem 1.5rem 0;font-size:.97rem;line-height:1.7}
 
-/* ═══════════════════════════════════════════════════════════════════════
-   20. CTA KOŃCOWE + STOPKA
-   ═══════════════════════════════════════════════════════════════════════ */
-.final{text-align:center;max-width:680px;margin-inline:auto}
-.final .btn-row{justify-content:center;margin-top:2rem}
-.final p{margin-top:1.2rem;color:#9CA9C5}
+/* ╔═════════════════════════════════════════════════════════════════════╗
+   ║  CZĘŚĆ 9 — regulamin.html + polityka-prywatnosci.html               ║
+   ║  Układ dokumentu prawnego: spis treści z boku, treść obok.          ║
+   ╚═════════════════════════════════════════════════════════════════════╝ */
 
-.footer{background:var(--petrol-d);color:#93A3C0;padding-block:clamp(3rem,5vw,4.5rem) 0;font-size:.92rem}
-.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2.5rem}
-@media (max-width:860px){.footer-grid{grid-template-columns:1fr 1fr}}
-@media (max-width:520px){.footer-grid{grid-template-columns:1fr}}
-.footer h4{color:#fff;font-family:var(--mono);font-size:.67rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.1rem}
-.footer a{color:#BAC8DF;text-decoration:none}
-.footer a:hover{color:#fff;text-decoration:underline}
-.footer ul{list-style:none;padding:0;margin:0;display:grid;gap:.55rem}
-.footer-brand p{margin-top:.8rem;line-height:1.65;max-width:34ch}
-.footer-pwz{font-family:var(--mono);font-size:.71rem;letter-spacing:.05em;margin-top:1rem;color:#8FA0BE}
-.footer-bottom{margin-top:3rem;padding:1.5rem 0;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;gap:.6rem 1.5rem;justify-content:space-between;font-family:var(--mono);font-size:.71rem;letter-spacing:.04em;color:#8FA0BE}
-
-/* ═══════════════════════════════════════════════════════════════════════
-   21. STICKY BAR MOBILE
-   ═══════════════════════════════════════════════════════════════════════ */
-.mobile-cta{
-  position:fixed;left:0;right:0;bottom:0;z-index:95;display:none;gap:.6rem;
-  padding:.7rem .9rem calc(.7rem + env(safe-area-inset-bottom));
-  background:rgba(250,251,253,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);
-}
-.mobile-cta .btn{flex:1;padding:.95rem 1rem;font-size:.95rem}
-@media (max-width:760px){.mobile-cta{display:flex}body{padding-bottom:78px}}
-
-/* ═══════════════════════════════════════════════════════════════════════
-   22. REVEAL
-   ═══════════════════════════════════════════════════════════════════════ */
-.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s cubic-bezier(.22,.85,.3,1),transform .65s cubic-bezier(.22,.85,.3,1)}
-.js .reveal.is-in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none}}
-
-/* ═══════════════════════════════════════════════════════════════════════
-   23. DOKUMENT PRAWNY — regulamin, polityka prywatności
-   ═══════════════════════════════════════════════════════════════════════ */
+/* ─── 9.1 · Siatka dokumentu ──────────────────────────────────────────
+   To ona robi układ dwukolumnowy. NIE trzeba dokładać float ani
+   szerokości procentowych — patrz CZĘŚĆ 11.                           */
 .doc{display:grid;grid-template-columns:230px 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:start}
 @media (max-width:900px){.doc{grid-template-columns:1fr;gap:2.25rem}}
 
-/* Spis treści — przykleja się przy przewijaniu na desktopie */
+/* ─── 9.2 · Spis treści ───────────────────────────────────────────────
+   Na desktopie przykleja się przy przewijaniu, na telefonie staje się
+   kartą nad treścią. Numery § generuje CSS przez licznik.             */
 .doc-toc{position:sticky;top:calc(var(--header-h) + 24px)}
 @media (max-width:900px){
   .doc-toc{position:static;background:var(--mist);border-radius:var(--r);padding:1.25rem 1.35rem}
 }
-.doc-toc h2{
-  font-family:var(--mono);font-size:.67rem;font-weight:500;letter-spacing:.15em;
-  text-transform:uppercase;color:var(--muted);margin-bottom:.9rem;
-}
+.doc-toc h2{font-family:var(--mono);font-size:.67rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.9rem}
 .doc-toc ol{list-style:none;padding:0;margin:0;counter-reset:toc;display:grid;gap:.1rem}
 .doc-toc a{
   display:grid;grid-template-columns:2.1rem 1fr;gap:.35rem;align-items:baseline;
   font-size:.89rem;line-height:1.35;color:var(--body);text-decoration:none;
   padding:.42rem .55rem;border-radius:7px;transition:color .16s,background .16s;
 }
-.doc-toc a::before{
-  counter-increment:toc;content:"§" counter(toc);
-  font-family:var(--mono);font-size:.74rem;color:var(--muted);transition:color .16s;
-}
+.doc-toc a::before{counter-increment:toc;content:"§" counter(toc);font-family:var(--mono);font-size:.74rem;color:var(--muted);transition:color .16s}
 .doc-toc a:hover{color:var(--ink);background:#fff}
 .doc-toc a:hover::before{color:var(--tape)}
 @media (max-width:900px){.doc-toc a:hover{background:var(--paper)}}
 
-/* Treść dokumentu */
+/* ─── 9.3 · Treść dokumentu ───────────────────────────────────────────
+   68ch to komfortowa długość wiersza do czytania długiego tekstu.     */
 .doc-body{max-width:68ch;min-width:0}
 .doc-meta{
   font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;color:var(--muted);
@@ -652,30 +745,84 @@ tr.is-featured .p-cost{color:var(--tape)}
 .doc-body p{margin-bottom:.85rem;font-size:.99rem}
 .doc-body p:last-child{margin-bottom:0}
 
+/* ─── 9.4 · Numerowane ustępy ─────────────────────────────────────── */
 .rules{list-style:none;counter-reset:rule;padding:0;margin:0;display:grid;gap:.75rem}
-.rules li{
-  counter-increment:rule;display:grid;grid-template-columns:2rem 1fr;gap:.45rem;
-  font-size:.99rem;line-height:1.65;
-}
-.rules li::before{
-  content:counter(rule) ".";font-family:var(--mono);font-size:.85rem;
-  color:var(--muted);padding-top:.12em;
-}
+.rules li{counter-increment:rule;display:grid;grid-template-columns:2rem 1fr;gap:.45rem;font-size:.99rem;line-height:1.65}
+.rules li::before{content:counter(rule) ".";font-family:var(--mono);font-size:.85rem;color:var(--muted);padding-top:.12em}
 .rules strong{color:var(--ink);font-weight:600}
 
-/* ═══════════════════════════════════════════════════════════════════════
-   DO ZMIANY POZA TYM PLIKIEM
-   ───────────────────────────────────────────────────────────────────────
-   Trzy miejsca mają kolory wpisane na sztywno w HTML — trzeba je
-   podmienić ręcznie na każdej podstronie:
 
-   1) <meta name="theme-color" content="#0E3A45">  →  content="#3A4763"
+/* ╔═════════════════════════════════════════════════════════════════════╗
+   ║  CZĘŚĆ 10 — POMOCNICZE                                              ║
+   ║  Drobne klasy do doraźnych poprawek. Nazwy zaczynają się od u-,     ║
+   ║  żeby od razu było widać, że to nie komponent.                      ║
+   ╚═════════════════════════════════════════════════════════════════════╝ */
 
-   2) Znak w nagłówku (.brand-mark), dwa atrybuty stroke:
-        stroke="#0E3A45"  →  stroke="#56698F"
-        stroke="#C42A50"  →  stroke="#00A0E3"
-      oraz fill="#0E3A45" w <circle> →  fill="#56698F"
+.u-left{text-align:left}
+.u-center{text-align:center}
 
-   3) Zdjęcie img/portret-hero.jpg — JUŻ PRZELICZONE na nowy odcień tła.
-      Wystarczy podmienić plik w katalogu img/.
-   ═══════════════════════════════════════════════════════════════════════ */
+/* Ograniczenie szerokości bloku tekstu — zamiast width w procentach.
+   Procent zależy od rodzica i rozjeżdża się przy każdej zmianie
+   układu; ch trzyma stałą długość wiersza niezależnie od kontenera. */
+.u-narrow{max-width:44ch}
+.u-wide{max-width:68ch}
+
+/* Nagłówek pośredni — mniejszy od h2, większy od h3. Płynny, więc
+   nie rozjedzie się na telefonie tak jak stała wartość w px.        */
+.u-h-md{font-size:clamp(1.4rem,2.4vw,1.9rem);line-height:1.2}
+
+/* Odstępy pionowe */
+.u-mt-0{margin-top:0}
+.u-mt-1{margin-top:1rem}
+.u-mt-2{margin-top:2rem}
+.u-mb-0{margin-bottom:0}
+.u-mb-1{margin-bottom:1rem}
+.u-mb-2{margin-bottom:2rem}
+
+
+/* ╔═════════════════════════════════════════════════════════════════════╗
+   ║  CZĘŚĆ 11 — DO MIGRACJI                                             ║
+   ║  Reguły dopisane ręcznie na dole poprzedniej wersji pliku.          ║
+   ║  Zostawiam je, żeby nic nie przestało działać z dnia na dzień,      ║
+   ║  ale każda ma prostszy zamiennik. Po poprawieniu HTML usuń całą     ║
+   ║  tę część.                                                          ║
+   ╚═════════════════════════════════════════════════════════════════════╝
+
+   ┌──────────────────┬──────────────────────┬──────────────────────────┐
+   │ obecnie w HTML   │ zamień na            │ dlaczego                 │
+   ├──────────────────┼──────────────────────┼──────────────────────────┤
+   │ id="paragraf…"   │ class="u-left"       │ .doc-body już wyrównuje  │
+   │                  │ (albo nic)           │ tekst do lewej           │
+   ├──────────────────┼──────────────────────┼──────────────────────────┤
+   │ id="textdolew…"  │ class="u-narrow"     │ nazwa trafia do publicz- │
+   │                  │                      │ nego pliku CSS; szerokość│
+   │                  │                      │ w % rozjeżdża się przy   │
+   │                  │                      │ zmianie układu           │
+   ├──────────────────┼──────────────────────┼──────────────────────────┤
+   │ id="h2regulamin" │ class="u-h-md"       │ 30px nie skaluje się na  │
+   │                  │                      │ telefonie                │
+   ├──────────────────┼──────────────────────┼──────────────────────────┤
+   │ id="lewo20"      │ usuń — wystarczy     │ float nie działa na      │
+   │ id="prawo80"     │ <div class="doc">    │ elementach siatki grid;  │
+   │                  │ z .doc-toc i         │ .doc robi te kolumny od  │
+   │                  │ .doc-body w środku   │ początku                 │
+   └──────────────────┴──────────────────────┴──────────────────────────┘ */
+
+#paragrafregulamin{text-align:left}
+#textdolewejdochuja{width:50%;display:block}
+#h2regulamin{font-size:30px}
+#lewo20{display:block;width:20%;float:left}
+#prawo80{width:80%}
+
+
+/* ╔═════════════════════════════════════════════════════════════════════╗
+   ║  KOLORY WPISANE NA SZTYWNO W HTML                                   ║
+   ║  Do podmiany ręcznie na każdej podstronie:                          ║
+   ║                                                                     ║
+   ║    <meta name="theme-color" content="#0E3A45">  →  "#3A4763"        ║
+   ║                                                                     ║
+   ║    Znak w nagłówku (.brand-mark):                                   ║
+   ║      stroke="#0E3A45"  →  stroke="#56698F"                          ║
+   ║      stroke="#C42A50"  →  stroke="#00A0E3"                          ║
+   ║      fill="#0E3A45"    →  fill="#56698F"                            ║
+   ╚═════════════════════════════════════════════════════════════════════╝ */
