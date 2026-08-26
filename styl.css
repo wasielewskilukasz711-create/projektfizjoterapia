@@ -215,7 +215,7 @@ p{text-wrap:pretty}
    ╚═════════════════════════════════════════════════════════════════════╝ */
 
 /* ─── 2.1 · Pasek górny (adres i telefon) ─────────────────────────── */
-.topbar{background:var(--petrol-d);color:#9CACC8;font-family:var(--mono);font-size:.73rem;letter-spacing:.03em;padding:.55rem 0}
+.topbar{background:var(--petrol-d);color: white;font-family:var(--mono);font-size:.73rem;letter-spacing:.03em;padding:.55rem 0}
 .topbar .wrap{display:flex;gap:1.6rem;flex-wrap:wrap;justify-content:center}
 .topbar a{color:#C9D6E9;text-decoration:none}
 .topbar a:hover{color:#fff}
