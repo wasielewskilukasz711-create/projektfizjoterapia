@@ -392,25 +392,203 @@ p{text-wrap:pretty}
   .arc text{opacity:.55}
 }
 
-/* ─── 4.3 · Portret w sekcji powitalnej ───────────────────────────────
-   Tło zdjęcia jest wtopione w --mist, więc portret nie ma widocznej
-   krawędzi. Plik img/portret-hero.jpg jest już przeliczony na #E8EFF7. */
-.portrait{
-  position:relative;z-index:2;width:86%;margin-left:auto;
-  background:var(--mist);border:1px solid var(--mist-2);border-radius:var(--r);
-  overflow:hidden;box-shadow:0 32px 60px -46px rgba(58,71,99,.75);
+/* ─── 4.3 · Portret w sekcji powitalnej ─────────────────────────────── */
+.portrait {
+  position: relative;
+  z-index: 2;
+  width: 86%;
+  margin-left: auto;
+  background: var(--mist);
+  border: 1px solid var(--mist-2);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: 0 32px 60px -46px rgba(58, 71, 99, .75);
 }
-.portrait img{width:100%;height:auto;display:block}
-.portrait figcaption{
-  position:absolute;left:0;right:0;bottom:0;
-  padding:2.4rem 1.3rem .95rem;
-  background:linear-gradient(to top,rgba(43,53,80,.92),rgba(43,53,80,0));
-  font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:#CDD9EA;
+
+.portrait img {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* Łagodne przejście do czarno-białego */
+  transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.portrait figcaption b{display:block;font-family:var(--sans);font-size:.98rem;letter-spacing:0;text-transform:none;color:#fff;margin-bottom:.12rem}
-@media (max-width:920px){
-  .portrait{width:100%;max-width:400px;margin-inline:auto}
-  .arc{left:-6%;width:56%}
+
+.portrait figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 3rem 1.3rem 1rem;
+  background: linear-gradient(to top, rgba(43, 53, 80, 0.95) 20%, rgba(43, 53, 80, 0));
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #CDD9EA;
+}
+
+.portrait figcaption b {
+  display: block;
+  font-family: var(--sans);
+  font-size: .98rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #fff;
+  margin-bottom: .12rem;
+}
+
+.portrait figcaption .sub-title {
+  display: block;
+  margin-bottom: .6rem;
+}
+
+/* ─── EFEKT CZARNO-BIAŁY I ODWRACANIE / PISANIE WIELOWIERSZOWE ───────── */
+
+.typing-text-multiline {
+  font-family: var(--mono);
+  font-size: clamp(0.72rem, 2vw, 0.88rem);
+  line-height: 1.45;
+  color: #ffffff;
+  text-transform: none;
+  letter-spacing: normal;
+  margin-top: 0.4rem;
+  
+  /* Płynne zawijanie w wielu liniach */
+  white-space: normal;
+  word-break: break-word;
+  
+  /* Maszkarada / Odkrywanie tekstu od lewej do prawej i z góry do dołu */
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* ─── DWULINIOWY EFEKT PISANIA NA MASZYNIE ─────────────────────────── */
+
+.typing-container {
+  margin-top: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.line-1, 
+.line-2 {
+  font-family: var(--mono);
+  /* clamp dopasuje rozmiar na telefonach, żeby linie się mieściły */
+  font-size: clamp(0.6rem, 1.7vw, 0.78rem);
+  color: #ffffff;
+  text-transform: none;
+  letter-spacing: normal;
+  
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid transparent;
+  width: 0;
+  opacity: 0;
+}
+
+/* --- LOGIKA DLA DESKTOPÓW (Hover) --- */
+@media (hover: hover) {
+  .portrait:hover img {
+    filter: grayscale(100%);
+  }
+
+  /* Pierwsza linia: pisze się 1.2s, 25 znaków */
+  .portrait:hover .line-1 {
+    opacity: 1;
+    animation: 
+      type-line1 1.2s steps(25, end) forwards,
+      blink 0.4s step-end 3,
+      hide-cursor 0s 1.2s forwards;
+  }
+
+  /* Druga linia: CZEKA 1.2s (delay), potem pisze się przez 1.8s (40 znaków) */
+  .portrait:hover .line-2 {
+    opacity: 1;
+    animation: 
+      type-line2 1.8s steps(40, end) 1.2s forwards,
+      blink 0.4s step-end 1.2s 4.5,
+      hide-cursor 0s 3s forwards;
+  }
+}
+
+/* --- LOGIKA DLA MOBILNYCH (Dotyk - start automatyczny) --- */
+@media (hover: none) {
+  .portrait img {
+    filter: grayscale(100%);
+  }
+
+  .line-1 {
+    opacity: 1;
+    animation: 
+      type-line1 1.2s steps(25, end) forwards,
+      blink 0.4s step-end 3,
+      hide-cursor 0s 1.2s forwards;
+  }
+
+  .line-2 {
+    opacity: 1;
+    animation: 
+      type-line2 1.8s steps(40, end) 1.2s forwards,
+      blink 0.4s step-end 1.2s 4.5,
+      hide-cursor 0s 3s forwards;
+  }
+}
+
+/* Breakpoint z Twojego kodu CSS */
+@media (max-width: 920px) {
+  .portrait {
+    width: 100%;
+    max-width: 400px;
+    margin-inline: auto;
+  }
+  .arc {
+    left: -6%;
+    width: 56%;
+  }
+}
+
+/* ─── ANIMACJE (KEYFRAMES) ─────────────────────────────────────────── */
+
+/* Linia 1 rozszerza się do swojej pełnej długości */
+@keyframes type-line1 {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* Linia 2 rozszerza się od zera po opóźnieniu */
+@keyframes type-line2 {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* Mruganie kursora */
+@keyframes blink {
+  from, to { border-color: transparent; }
+  50% { border-color: #ffffff; }
+}
+
+/* Schowanie kursora po zakończeniu pisania danej linii */
+@keyframes hide-cursor {
+  to { border-right-color: transparent; }
+}
+
+/* ─── KLUCZOWE ANIMACJE (KEYFRAMES) ─────────────────────────────────── */
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  from, to { border-color: transparent; }
+  50% { border-color: #ffffff; }
+}
+
+/* Animacja usuwająca kursor na końcu */
+@keyframes remove-border {
+  to { border-right-color: transparent; }
 }
 
 /* ─── 4.4 · Pasek faktów ──────────────────────────────────────────── */
